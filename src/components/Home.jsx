@@ -1,14 +1,14 @@
 import Navbar from "./Navbar";
 import TrendingAnimes from "./TrendingAnimes";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import LatestEpisodes from "./LatestEpisodes";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import LatestEpisodes from "./LatestEpisodes";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Button } from 'antd';
+import { FaPlayCircle, FaClock, FaCalendarAlt, FaStar } from "react-icons/fa";
 
 
 
@@ -17,12 +17,14 @@ function Home() {
     const [trendingAnime, setTrendingAnime] = useState([])
     const [latestAnime, setLatestAnime] = useState([])
     const [latestAnimeDetails, setLatestAnimeDetails] = useState([])
+    const [search, SetSearch] = useState("")
+    const [searched, SetSearched] = useState([])
 
     const GetTopAnime = async () => {
 
         const [topAnimeResponse, trendingAnimeResponse, latestAnimeResponse] = await Promise.all([
-            axios.get('https://api.jikan.moe/v4/top/anime?filter=airing'), // Top airing animes for Swiper banner
-            axios.get('https://api.jikan.moe/v4/seasons/now'),  // Trending Animes swiper
+            axios.get('https://api.jikan.moe/v4/top/anime?filter=airing&sort=asc&type=tv&limit=10'), // Top airing animes for Swiper banner
+            axios.get('https://api.jikan.moe/v4/seasons/now?limit=10'),  // Trending Animes swiper
             axios.get('https://api.jikan.moe/v4/watch/episodes'), // Latest Episodes
         ])
         const topAnime = topAnimeResponse.data.data
@@ -44,22 +46,49 @@ function Home() {
         for (const id of ids) {
             const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`) // Get all details about latest episodes by id
             animeDetails.push(response.data.data)
-            await delay(10)
+            await delay(300)
         }
 
         setLatestAnimeDetails(animeDetails)
     }
 
+    const HandleSearch = (e) => {
+        const searchValue = e.target.value
+        SetSearch(searchValue)
+        if (searchValue.length > 2) {
+            GetSearchedAnime(searchValue)
+        } else {
+            SetSearched([]);
+        }
+    }
+
+    const GetSearchedAnime = async (search) => {
+        const searchResponse = await axios.get(`https://api.jikan.moe/v4/anime?q=${search}&sort=asc&limit=5`)
+        const searchedAnime = searchResponse.data.data
+        SetSearched(searchedAnime)
+    }
+
+
     useEffect(() => {
         GetTopAnime()
     }, [])
 
+    const formatDuration = (duration) => {
+        return duration.replace(' per ep', ''); // Trim the unnecessary information
+    };
 
     return (
         <>
-            <Navbar />
-            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-                {anime.map((anime) => (
+            <Navbar HandleSearch={HandleSearch} search={search} SetSearch={SetSearch} searchedAnime={searched} />
+            <Swiper
+                navigation={true}
+                modules={[Navigation, Autoplay]}
+                className="mySwiper"
+                autoplay={{
+                    delay: 5500,
+                    disableOnInteraction: false,
+                }}>
+                {anime.map((anime, index) => (
                     <SwiperSlide key={anime.mal_id}>
                         <div className="main-slide-wrapper">
                             <div className="slide-cover">
@@ -67,12 +96,19 @@ function Home() {
                                 <div className="gradient-overlay"></div>
                             </div>
                             <div className="slide-description">
+                                <div className="rank">#{index + 1} Top Airing</div>
                                 <h1>{anime.title_english}</h1>
+                                <div className="slide-detail">
+                                    <div><FaPlayCircle /> {anime.type}</div>
+                                    <div><FaClock />{formatDuration(anime.duration)}</div>
+                                    <div><FaCalendarAlt /> {anime.aired.string.split('to')[0]}</div>
+                                    <div><FaStar fill="yellow" />{anime.score}</div>
+                                </div>
                                 <div className="description">
                                     {anime.synopsis}
                                 </div>
                                 <div className="slide-button">
-                                    <button>Watch Now</button>
+                                    <Button type="primary" size="large"><FaPlayCircle />Watch Now</Button>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ const items = [
         key: '1',
         label: (
             <a target="_blank" rel="noopener noreferrer" href="">
-                1st menu item
+                Watching
             </a>
         ),
     },
@@ -21,7 +21,7 @@ const items = [
         key: '2',
         label: (
             <a target="_blank" rel="noopener noreferrer" href="">
-                2nd menu item
+                Plan to watch
             </a>
         ),
     },
@@ -29,7 +29,7 @@ const items = [
         key: '3',
         label: (
             <a target="_blank" rel="noopener noreferrer" href="">
-                3rd menu item
+                Completed
             </a>
         ),
     },

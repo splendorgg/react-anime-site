@@ -51,6 +51,7 @@ function Home() {
         await delay(500);
 
         const completedResponse = await axios.get('https://api.jikan.moe/v4/anime?type=tv&order_by=end_date&sort=desc&status=complete&limit=5')
+        await delay(500);
 
         const topAnime = topAnimeResponse.data.data
         const trendingAnime = trendingAnimeResponse.data.data
@@ -79,7 +80,7 @@ function Home() {
         for (const id of ids) {
             const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`) // Get all details about latest episodes by id
             animeDetails.push(response.data.data)
-            await delay(80)
+            await delay(300)
         }
 
         setLatestAnimeDetails(animeDetails)

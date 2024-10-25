@@ -684,3 +684,151 @@ body {
 
 
 }
+
+
+
+.anime-detail-page {
+    width: 100%;
+    padding-top: 100px;
+}
+
+.anime-detail {
+    margin-top: -30px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.anime-container {
+    display: flex;
+    gap: 50px;
+    padding: 70px 0 70px 45px;
+    background-color: #54535f;
+
+    .ani-img {
+        width: 180px;
+        flex-shrink: 0;
+        box-shadow: 0 40px 40px rgba(0, 0, 0, .2);
+        background-color: rgba(255, 255, 255, .1);
+        display: block;
+        height: 270px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .ani-detail {
+        flex: 1;
+        padding-right: 60px;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+
+        .ani-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 35px;
+        }
+
+        .ani-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 35px;
+
+            .ant-btn {
+                border-radius: 30px;
+                color: black;
+                box-shadow: #201f31;
+            }
+
+            .watch-button {
+                background-color: #ffbade;
+            }
+
+            .add-button {
+                background-color: white;
+            }
+        }
+
+
+        .ani-title {
+            font-size: 40px;
+            line-height: 1.1em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+
+
+    }
+
+    .ani-synopsis {
+        font-size: 15px;
+        line-height: 1.5em;
+        font-weight: 300;
+        color: white;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        padding-right: 55px;
+    }
+
+
+    .ani-side-info-wrap {
+        overflow: hidden;
+        flex: 0 1 calc(25% - 30px);
+        max-width: calc(25% - 30px);
+        background: rgba(255, 255, 255, .1);
+        padding: 15px 20px;
+        font-size: 14px;
+        line-height: 1.4em;
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+
+    .info-title {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 10px;
+        margin-right: 4px;
+    }
+
+    .info-value {
+        color: #e7e7e8;
+
+    }
+
+    .info-genre-value {
+        color: #e7e7e8;
+    }
+
+
+    .info-element {
+        margin-bottom: 10px;
+    }
+
+    .info-genres {
+        padding: 10px 0 5px;
+        border-top: 1px solid rgba(255, 255, 255, .1);
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        margin-bottom: 10px;
+    }
+
+    .genre-item {
+        display: inline-block;
+        margin-right: 8px;
+        border: solid 2px rgba(255, 255, 255, .3);
+        padding: 2px 8px;
+        border-radius: 20px;
+    }
+
+
+}

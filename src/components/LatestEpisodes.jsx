@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { FaPlay } from "react-icons/fa";
 import { usePopper } from 'react-popper';
 import { useState, useRef } from "react";
@@ -58,6 +59,12 @@ function LatestEpisodes({ latestAnimeDetails }) {
     const formatDuration = (duration) => {
         return duration.replace(' per ep', ''); // Trim the unnecessary information
     };
+
+    const navigate = useNavigate()
+    const handleClick = (anime) => {
+        navigate(`/anime/${anime.mal_id}`, { state: { anime } })
+    }
+
     return (
         <>
             <div className="recent-sub-container">
@@ -72,7 +79,7 @@ function LatestEpisodes({ latestAnimeDetails }) {
                             }
                             return (
                                 <div className="recent-anime" key={latest.mal_id} onMouseEnter={(e) => handleMouseEnter(latest, e.currentTarget)} // Mouse hover
-                                    onMouseLeave={handleMouseLeave}>
+                                    onMouseLeave={handleMouseLeave} onClick={() => handleClick(latest)}>
                                     <div className="anime-img">
                                         <img src={imageUrl} alt="" />
                                         <FaPlay size={30} className="recent-play" />

@@ -51,9 +51,9 @@ function Navbar(props) {
             <div ref={navRef} className="navbar   "   >
                 <div className="navbar-left flex items-center gap-5 ">
                     <div className="menu-button">
-                                <Dropdown menu={{ items, }} placement='bottom'>
-                                    <IoMenu size={32} color='white' />
-                                </Dropdown>
+                        <Dropdown menu={{ items, }} placement='bottom'>
+                            <IoMenu size={32} color='white' />
+                        </Dropdown>
                     </div>
                     <div className="logo text-red-50">
                         <p >MANYAK ANIME SITESI</p>
@@ -64,7 +64,7 @@ function Navbar(props) {
                         />
 
                         <div className="search-list">
-                            {props.searchedAnime.map(anime => (
+                            {props.searchedAnime?.map(anime => (
                                 <div className="search-card" key={anime.mal_id}>
                                     <a href="" >
                                         <div className="search-poster">
@@ -85,8 +85,10 @@ function Navbar(props) {
                                         </div>
                                     </a>
                                 </div>
-                            ))}
-                            {props.searchedAnime.length > 2 &&
+                            ))
+
+                            }
+                            {props.searchedAnime?.length > 2 &&
                                 <div className="search-all">
                                     <a href=""> View All Results <FaChevronRight size={12} /></a>
                                 </div>

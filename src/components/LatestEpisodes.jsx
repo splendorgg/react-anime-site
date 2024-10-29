@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { FaPlay } from "react-icons/fa";
 import { usePopper } from 'react-popper';
 import { useState, useRef } from "react";
 import { Button, Dropdown, Space, } from 'antd';
 import { PlusOutlined, CaretRightFilled } from '@ant-design/icons';
-import { FaStar } from "react-icons/fa";
+import { FaStar,FaPlay } from "react-icons/fa";
 const items = [
     {
         key: '1',

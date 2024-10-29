@@ -80,7 +80,7 @@ function Home() {
         for (const id of ids) {
             const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`) // Get all details about latest episodes by id
             animeDetails.push(response.data.data)
-            await delay(300)
+            await delay(500)
         }
 
         setLatestAnimeDetails(animeDetails)

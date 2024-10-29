@@ -38,9 +38,9 @@ function Navbar(props) {
     useEffect(() => {
         window.addEventListener('scroll', () => {
             if (window.scrollY >= 80)
-                navRef.current.classList.add('nav-scrolled')
+                navRef.current?.classList.add('nav-scrolled')
             else
-                navRef.current.classList.remove('nav-scrolled')
+                navRef.current?.classList.remove('nav-scrolled')
         })
     }, [])
 
@@ -48,7 +48,7 @@ function Navbar(props) {
 
     return (
         <>
-            <div ref={navRef} className="navbar   "   >
+            <div ref={navRef} className="navbar"   >
                 <div className="navbar-left flex items-center gap-5 ">
                     <div className="menu-button">
                         <Dropdown menu={{ items, }} placement='bottom'>

@@ -52,7 +52,6 @@ function Navbar(props) {
     }, [])
 
 
-
     return (
         <>
             <div ref={navRef} className="navbar"   >

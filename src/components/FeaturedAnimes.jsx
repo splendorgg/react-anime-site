@@ -1,6 +1,29 @@
+import { useRef, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { Popper } from "./Popper";
+
 
 function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
+    const [showPopper, setShowPopper] = useState(false); // Popper kontrol state'i
+    const [currentAnime, setCurrentAnime] = useState(null); // Hover edilen anime bilgileri
+    const animeImgRef = useRef(null); // anime-img referansı
+
+    const handleMouseEnter = (anime, ref) => {
+        setCurrentAnime(anime);
+        animeImgRef.current = ref; // Hover edilen elementin referansı
+        setShowPopper(true); // Popper'ı göster
+    };
+
+    const handleMouseLeave = () => {
+        setShowPopper(false); // Popper'ı gizle
+        setCurrentAnime(null); // Bilgileri temizle
+    };
+
+    const navigate = useNavigate()
+    const handleClick = (anime) => {
+        navigate(`/anime/${anime.mal_id}`, { state: { anime } })
+    }
     return (
         <>
             <div className="featured">
@@ -10,9 +33,10 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                             <h2>Top Airing</h2>
                             <div className="anime-block">
                                 <ul>
-                                    {topairing.slice(0, 5).map((topairinganime, index) => (
-                                        <li key={index}>
-                                            <div className="list-image">
+                                    {topairing.slice(0, 5).map((topairinganime) => (
+                                        <li key={topairinganime.mal_id} >
+                                            <div className="list-image" onMouseEnter={(e) => handleMouseEnter(topairinganime, e.currentTarget)} // Mouse hover
+                                                onMouseLeave={handleMouseLeave} onClick={() => handleClick(topairinganime)}>
                                                 <img src={topairinganime.images.jpg.image_url} alt="" />
                                             </div>
                                             <div className="list-detail">
@@ -30,7 +54,9 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                                             </div>
                                         </li>
                                     ))}
-
+                                    {showPopper && currentAnime && (
+                                        <Popper currentAnime={currentAnime} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} animeImgRef={animeImgRef} />
+                                    )}
                                 </ul>
                             </div>
                         </div>
@@ -42,7 +68,8 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                                 <ul>
                                     {mostpopular.slice(0, 5).map((mostpopularanime, index) => (
                                         <li key={index}>
-                                            <div className="list-image">
+                                            <div className="list-image" onMouseEnter={(e) => handleMouseEnter(mostpopularanime, e.currentTarget)} // Mouse hover
+                                                onMouseLeave={handleMouseLeave} onClick={() => handleClick(mostpopularanime)}>
                                                 <img src={mostpopularanime.images.jpg.image_url} alt="" />
                                             </div>
                                             <div className="list-detail">
@@ -60,6 +87,9 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                                             </div>
                                         </li>
                                     ))}
+                                    {showPopper && currentAnime && (
+                                        <Popper currentAnime={currentAnime} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} animeImgRef={animeImgRef} />
+                                    )}
 
                                 </ul>
                             </div>
@@ -71,26 +101,30 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                             <h2>Most Favorite</h2>
                             <div className="anime-block">
                                 <ul>
-                                    {mostfavorite.slice(0, 5).map((mastfavoriteanime, index) => (
+                                    {mostfavorite.slice(0, 5).map((mostfavoriteanime, index) => (
                                         <li key={index}>
-                                            <div className="list-image">
-                                                <img src={mastfavoriteanime.images.jpg.image_url} alt="" />
+                                            <div className="list-image" onMouseEnter={(e) => handleMouseEnter(mostfavoriteanime, e.currentTarget)} // Mouse hover
+                                                onMouseLeave={handleMouseLeave} onClick={() => handleClick(mostfavoriteanime)}>
+                                                <img src={mostfavoriteanime.images.jpg.image_url} alt="" />
                                             </div>
                                             <div className="list-detail">
-                                                <h3 className="list-title">{mastfavoriteanime.title_english}</h3>
+                                                <h3 className="list-title">{mostfavoriteanime.title_english}</h3>
                                                 <div className="list-info">
                                                     <div className="list-score">
                                                         <FaStar fill='yellow' />
-                                                        {mastfavoriteanime.score}
+                                                        {mostfavoriteanime.score}
                                                     </div>
                                                     <span className="dot"></span>
                                                     <div className="list-episode">
-                                                        {mastfavoriteanime.type}
+                                                        {mostfavoriteanime.type}
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
                                     ))}
+                                    {showPopper && currentAnime && (
+                                        <Popper currentAnime={currentAnime} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} animeImgRef={animeImgRef} />
+                                    )}
 
                                 </ul>
                             </div>
@@ -104,7 +138,8 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                                 <ul>
                                     {completed.slice(0, 5).map((completedanime, index) => (
                                         <li key={index}>
-                                            <div className="list-image">
+                                            <div className="list-image" onMouseEnter={(e) => handleMouseEnter(completedanime, e.currentTarget)} // Mouse hover
+                                                onMouseLeave={handleMouseLeave} onClick={() => handleClick(completedanime)}>
                                                 <img src={completedanime.images.jpg.image_url} alt="" />
                                             </div>
                                             <div className="list-detail">
@@ -122,6 +157,9 @@ function FeaturedAnimes({ topairing, mostpopular, mostfavorite, completed }) {
                                             </div>
                                         </li>
                                     ))}
+                                    {showPopper && currentAnime && (
+                                        <Popper currentAnime={currentAnime} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} animeImgRef={animeImgRef} />
+                                    )}
 
                                 </ul>
                             </div>

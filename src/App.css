@@ -1014,3 +1014,12 @@ li {
     align-items: center;
     gap: 5px;
 }
+
+.abuzer {
+    .ant-popover-inner {
+        backdrop-filter: blur(20px);
+        max-width: 300px;
+        background-color: transparent;
+    }
+}
+

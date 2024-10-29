@@ -4,10 +4,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { usePopper } from "react-popper";
 import { createPortal } from "react-dom";
-import React, { useState, } from "react";
+import { useState, } from "react";
 import { Button, Dropdown, Space, } from 'antd';
 import { PlusOutlined, CaretRightFilled, RightOutlined, LeftOutlined } from '@ant-design/icons';
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 const items = [
     {
         key: '1',
@@ -78,6 +79,11 @@ function TrendingAnimes({ trendinganime }) {
         setCurrentData(undefined)
     };
 
+    const navigate = useNavigate()
+    const handleClick = (anime) => {
+        navigate(`/anime/${anime.mal_id}`, { state: { anime } })
+    }
+
     return (
         <>
             <Swiper
@@ -138,7 +144,7 @@ function TrendingAnimes({ trendinganime }) {
                                                 </div>
                                             </div>
                                             <div className="popper-button">
-                                                <Button type='primary' className='popper-watch-button' ><CaretRightFilled />Watch Now </Button>
+                                                <Button type='primary' className='popper-watch-button' onClick={() => handleClick(currentData)} ><CaretRightFilled />Watch Now </Button>
                                                 <div className="popper-add-dropdown">
                                                     <Space direction='vertical'>
                                                         <Space wrap>

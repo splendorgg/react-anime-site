@@ -1,7 +1,9 @@
-import { Button, Dropdown, Space, Input } from 'antd';
+import { Dropdown, Input } from 'antd';
 import { IoMenu } from "react-icons/io5";
 import { useEffect, useRef } from 'react';
 import { FaChevronRight } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+
 const items = [
     {
         key: '1',
@@ -31,6 +33,11 @@ const items = [
 function Navbar(props) {
     const navRef = useRef()
 
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate(`/`)
+    }
+
     const formatDuration = (duration) => {
         return duration.replace(' per ep', ''); // Trim the unnecessary information
     };
@@ -56,7 +63,7 @@ function Navbar(props) {
                         </Dropdown>
                     </div>
                     <div className="logo text-red-50">
-                        <p >MANYAK ANIME SITESI</p>
+                        <p onClick={() => handleClick()} style={{ cursor: 'pointer' }}>MANYAK ANIME SITESI</p>
                     </div>
                     <form className="searchbar" onSubmit={props.HandleSearch}>
                         <Input placeholder='Search anime' style={{ width: 360 }} required

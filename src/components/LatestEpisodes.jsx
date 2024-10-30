@@ -33,6 +33,9 @@ function LatestEpisodes({ latestAnimeDetails }) {
     }
 
 
+    const colorList = ["#d8b2a", "#ffbade", "#fc887b", "#ccabda", "#abccd8", "#86e3ce", "#d0e6a5"]
+    const animeGenres = ["Action", "Adventure", "Comedy", "Drama", "Fantasy", "Game", "Horror", "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller", "Ecchi", "Mecha", "Military", "Music", "Parody", "School", "Shoujo", "Shounen", "Josei", "Seinen", "Harem", "Isekai", "Historical", "Police", "Samurai", "Super Power", "Space", "Vampire"];
+
     return (
         <>
             <div className="recent-sub-container">
@@ -77,24 +80,11 @@ function LatestEpisodes({ latestAnimeDetails }) {
                     <h1>Genres</h1>
                     <div className="genres-container">
                         <ul className="genres-list">
-                            <li>Action </li>
-                            <li>Comedy </li>
-                            <li>Drama </li>
-                            <li>Horror </li>
-                            <li>Mecha </li>
-                            <li>Mystery </li>
-                            <li>Adventure </li>
-                            <li>Ecchi</li>
-                            <li>Harem</li>
-                            <li>Isekai</li>
-                            <li>Fantasy</li>
-                            <li>Magic</li>
-                            <li>Military</li>
-                            <li>Historical</li>
-                            <li>Music</li>
-                            <li>Police</li>
-                            <li>Demons</li>
-                            <li>School</li>
+                            {animeGenres.map((item, index) => (
+                                <li key={index} style={{ color: colorList[index % colorList.length] }}>
+                                    {item}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

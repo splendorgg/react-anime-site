@@ -77,11 +77,11 @@ function AnimeDetailPage() {
             <div className="anime-detail-page">
                 <div className="anime-detail">
                     <div className="anime-container" >
-                        <div className="abuzer">
-                            <div className="mahmut" style={{ backgroundImage: `url(${animeDetails.images.jpg.image_url})` }}>
+                        <div className="detail-background">
+                            <div className="detail-back" style={{ backgroundImage: `url(${animeDetails.images.jpg.image_url})` }}>
                             </div>
                         </div>
-                        <div className="enust">
+                        <div className="detail-wrapper">
 
                             <div className="ani-img">
                                 <img src={animeDetails.images.jpg.image_url} />
@@ -205,7 +205,8 @@ function AnimeDetailPage() {
                                     <ul>
                                         {popularAnimes.map((popularanime, index) => (
                                             <li key={index}>
-                                                <div className="list-image">
+                                                <div className="list-image" onMouseEnter={(e) => handleMouseEnter(popularanime, e.currentTarget)} // Mouse hover
+                                                    onMouseLeave={handleMouseLeave} onClick={() => handleClick(popularanime)}>
                                                     <img src={popularanime.images.jpg.image_url} alt="" />
                                                 </div>
                                                 <div className="list-detail">
@@ -223,6 +224,9 @@ function AnimeDetailPage() {
                                                 </div>
                                             </li>
                                         ))}
+                                        {showPopper && currentAnime && (
+                                            <Popper currentAnime={currentAnime} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} animeImgRef={animeImgRef} />
+                                        )}
 
                                     </ul>
                                 </div>

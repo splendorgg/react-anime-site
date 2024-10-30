@@ -20,6 +20,9 @@ function AnimeDetailPage() {
     const animeImgRef = useRef(null); // anime-img referansı
 
 
+    const [search, SetSearch] = useState("")
+    const [searched, SetSearched] = useState([])
+
 
     const handleMouseEnter = (anime, ref) => {
         setCurrentAnime(anime);
@@ -67,13 +70,27 @@ function AnimeDetailPage() {
     const formatDuration = (duration) => {
         return duration.replace(' per ep', ''); // Trim the unnecessary information
     };
+    const HandleSearch = (e) => {
+        const searchValue = e.target.value
+        SetSearch(searchValue)
+        if (searchValue.length > 2) {
+            GetSearchedAnime(searchValue)
+        } else {
+            SetSearched([]);
+        }
+    }
+    const GetSearchedAnime = async (search) => {
+        const searchResponse = await axios.get(`https://api.jikan.moe/v4/anime?q=${search}&sort=asc&limit=5`)
+        const searchedAnime = searchResponse.data.data
+        SetSearched(searchedAnime)
+    }
 
 
     if (!animeDetails) return <div>Loading...</div>;
 
     return (
         <>
-            <Navbar />
+            <Navbar HandleSearch={HandleSearch} search={search} SetSearch={SetSearch} searchedAnime={searched} />
             <div className="anime-detail-page">
                 <div className="anime-detail">
                     <div className="anime-container" >

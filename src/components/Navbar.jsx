@@ -37,10 +37,14 @@ function Navbar(props) {
     const handleClick = () => {
         navigate(`/`)
     }
-
+    const handleAnimeClick = (anime) => {
+        navigate(`/anime/${anime.mal_id}`, { state: { anime } })
+    }
     const formatDuration = (duration) => {
         return duration.replace(' per ep', ''); // Trim the unnecessary information
     };
+
+
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -50,6 +54,9 @@ function Navbar(props) {
                 navRef.current?.classList.remove('nav-scrolled')
         })
     }, [])
+
+
+
 
     return (
         <>
@@ -61,16 +68,16 @@ function Navbar(props) {
                         </Dropdown>
                     </div>
                     <div className="logo text-red-50">
-                        <p onClick={() => handleClick()} style={{ cursor: 'pointer' }}>MANYAK ANIME SITESI</p>
+                        <p onClick={() => handleClick()} style={{ cursor: 'pointer' }}>ANIME SITE</p>
                     </div>
                     <form className="searchbar" onSubmit={props.HandleSearch}>
                         <Input placeholder='Search anime' style={{ width: 360 }} required
                             value={props.search} onChange={props.HandleSearch}
                         />
 
-                        <div className="search-list">
+                        <div className="search-list" >
                             {props.searchedAnime?.map(anime => (
-                                <div className="search-card" key={anime.mal_id}>
+                                <div className="search-card" key={anime.mal_id} onClick={() => handleAnimeClick(anime)}>
                                     <a href="" >
                                         <div className="search-poster">
                                             <img src={anime.images.jpg.image_url} alt="" />

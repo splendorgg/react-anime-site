@@ -5,21 +5,21 @@ import { Popper } from './Popper';
 
 
 function LatestEpisodes({ latestAnimeDetails }) {
-    const [showPopper, setShowPopper] = useState(false); // Popper kontrol state'i
-    const [currentAnime, setCurrentAnime] = useState(null); // Hover edilen anime bilgileri
-    const animeImgRef = useRef(null); // anime-img referansı
+    const [showPopper, setShowPopper] = useState(false);
+    const [currentAnime, setCurrentAnime] = useState(null);
+    const animeImgRef = useRef(null);
 
 
-    // Hover başladığında anime bilgilerini ve referansı ayarlıyoruz
+
     const handleMouseEnter = (anime, ref) => {
         setCurrentAnime(anime);
-        animeImgRef.current = ref; // Hover edilen elementin referansı
-        setShowPopper(true); // Popper'ı göster
+        animeImgRef.current = ref;
+        setShowPopper(true);
     };
 
     const handleMouseLeave = () => {
-        setShowPopper(false); // Popper'ı gizle
-        setCurrentAnime(null); // Bilgileri temizle
+        setShowPopper(false);
+        setCurrentAnime(null);
     };
 
 

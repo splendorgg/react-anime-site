@@ -34,10 +34,10 @@ const items = [
 ];
 
 export const Popper = ({ currentAnime, handleMouseEnter, handleMouseLeave, animeImgRef }) => {
-    const [popperElement, setPopperElement] = useState(null); // Popper referansı
+    const [popperElement, setPopperElement] = useState(null); 
     const { styles, attributes } = usePopper(animeImgRef.current, popperElement, {
-        placement: 'top', // Popper'ın nerede görüneceğini ayarla
-        modifiers: [{ name: 'offset', options: { offset: [0, -100] } }], // Konum ayarı
+        placement: 'top', 
+        modifiers: [{ name: 'offset', options: { offset: [0, -100] } }], 
     });
 
     const navigate = useNavigate()

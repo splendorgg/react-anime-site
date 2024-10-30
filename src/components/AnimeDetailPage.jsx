@@ -20,6 +20,9 @@ function AnimeDetailPage() {
     const animeImgRef = useRef(null); // anime-img referansı
 
 
+    const [search, SetSearch] = useState("")
+    const [searched, SetSearched] = useState([])
+
 
     const handleMouseEnter = (anime, ref) => {
         setCurrentAnime(anime);
@@ -67,21 +70,35 @@ function AnimeDetailPage() {
     const formatDuration = (duration) => {
         return duration.replace(' per ep', ''); // Trim the unnecessary information
     };
+    const HandleSearch = (e) => {
+        const searchValue = e.target.value
+        SetSearch(searchValue)
+        if (searchValue.length > 2) {
+            GetSearchedAnime(searchValue)
+        } else {
+            SetSearched([]);
+        }
+    }
+    const GetSearchedAnime = async (search) => {
+        const searchResponse = await axios.get(`https://api.jikan.moe/v4/anime?q=${search}&sort=asc&limit=5`)
+        const searchedAnime = searchResponse.data.data
+        SetSearched(searchedAnime)
+    }
 
 
     if (!animeDetails) return <div>Loading...</div>;
 
     return (
         <>
-            <Navbar />
+            <Navbar HandleSearch={HandleSearch} search={search} SetSearch={SetSearch} searchedAnime={searched} />
             <div className="anime-detail-page">
                 <div className="anime-detail">
                     <div className="anime-container" >
-                        <div className="abuzer">
-                            <div className="mahmut" style={{ backgroundImage: `url(${animeDetails.images.jpg.image_url})` }}>
+                        <div className="detail-background">
+                            <div className="detail-back" style={{ backgroundImage: `url(${animeDetails.images.jpg.image_url})` }}>
                             </div>
                         </div>
-                        <div className="enust">
+                        <div className="detail-wrapper">
 
                             <div className="ani-img">
                                 <img src={animeDetails.images.jpg.image_url} />
@@ -200,12 +217,13 @@ function AnimeDetailPage() {
                     <div className="sidebar">
                         <div className="most-popular-sidebar">
                             <div className="section1 subsection">
-                                <h2>Top Airing</h2>
+                                <h2>Top Animes</h2>
                                 <div className="anime-block">
                                     <ul>
                                         {popularAnimes.map((popularanime, index) => (
                                             <li key={index}>
-                                                <div className="list-image">
+                                                <div className="list-image" onMouseEnter={(e) => handleMouseEnter(popularanime, e.currentTarget)} // Mouse hover
+                                                    onMouseLeave={handleMouseLeave} onClick={() => handleClick(popularanime)}>
                                                     <img src={popularanime.images.jpg.image_url} alt="" />
                                                 </div>
                                                 <div className="list-detail">
@@ -223,6 +241,9 @@ function AnimeDetailPage() {
                                                 </div>
                                             </li>
                                         ))}
+                                        {showPopper && currentAnime && (
+                                            <Popper currentAnime={currentAnime} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} animeImgRef={animeImgRef} />
+                                        )}
 
                                     </ul>
                                 </div>

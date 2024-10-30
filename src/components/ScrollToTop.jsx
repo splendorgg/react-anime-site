@@ -5,8 +5,8 @@ const ScrollToTop = () => {
     const { pathname } = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0); // Sayfayı en üste kaydır
-    }, [pathname]); // Route değiştikçe çalışır
+        window.scrollTo(0, 0); 
+    }, [pathname]); 
 
     return null;
 };

@@ -4,6 +4,24 @@ body {
 
 }
 
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: rgba(255, 255, 255, .4);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(0, 0, 0, .2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .3);
+}
+
 .navbar {
     z-index: 500;
     position: fixed;
@@ -205,6 +223,7 @@ body {
 .slide-cover img {
     width: 100%;
     height: 100%;
+    object-position: center;
     object-fit: cover;
 }
 
@@ -560,20 +579,33 @@ body {
 
 .genres-list {
     overflow: hidden;
-    list-style: none;
     padding: 0;
+    list-style: none;
     display: block;
+    text-decoration: none;
 
     li {
         display: block;
         float: left;
-        width: 31%;
+        width: 31.33%;
         margin: 0 1% 3px;
         display: list-item;
-        padding: 9px 10px;
-        color: white;
-        font-weight: 500;
+        padding: 9px 8px;
+        font-weight: 600;
+        font-size: 14.4px;
+        overflow: hidden;
+        white-space: nowrap;
+        border-bottom: none;
+        word-spacing: -2px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        cursor: pointer;
     }
+
+    li:hover {
+        background: rgba(255, 255, 255, .1);
+    }
+
 }
 
 
@@ -694,7 +726,7 @@ body {
 
 }
 
-.enust {
+.detail-wrapper {
     position: relative;
     z-index: 5;
     display: flex;
@@ -702,14 +734,14 @@ body {
     padding: 70px 0 70px 45px;
 }
 
-.abuzer {
+.detail-background {
     position: absolute;
     inset: 0;
 }
 
 
 
-.mahmut {
+.detail-back {
     width: 100%;
     height: 100%;
     position: relative;
@@ -1022,4 +1054,3 @@ li {
         background-color: transparent;
     }
 }
-

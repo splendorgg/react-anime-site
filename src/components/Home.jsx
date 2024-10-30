@@ -16,7 +16,6 @@ import { FaPlayCircle, FaClock, FaCalendarAlt, FaStar } from "react-icons/fa";
 function Home() {
     const [anime, setAnime] = useState([])
     const [trendingAnime, setTrendingAnime] = useState([])
-    const [latestAnime, setLatestAnime] = useState([])
     const [latestAnimeDetails, setLatestAnimeDetails] = useState([])
     const [mostPopular, setMostPopular] = useState([])
     const [mostFavorite, setMostFavorite] = useState([])
@@ -63,7 +62,6 @@ function Home() {
 
         setAnime(topAnime)
         setTrendingAnime(trendingAnime)
-        setLatestAnime(latestAnime)
         setMostPopular(popularAnime)
         setMostFavorite(favoriteAnime)
         setCompleted(completedAnime)
@@ -105,7 +103,7 @@ function Home() {
 
     useEffect(() => {
         GetTopAnime()
-    }, [])
+    })
 
     const formatDuration = (duration) => {
         return duration.replace(' per ep', ''); // Trim the unnecessary information

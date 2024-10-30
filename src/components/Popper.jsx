@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { FaStar } from "react-icons/fa";
 import { PlusOutlined, CaretRightFilled } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const items = [
     {
@@ -33,12 +34,16 @@ const items = [
 ];
 
 export const Popper = ({ currentAnime, handleMouseEnter, handleMouseLeave, animeImgRef }) => {
-    const [popperElement, setPopperElement] = useState(null); // Popper referansı
+    const [popperElement, setPopperElement] = useState(null); 
     const { styles, attributes } = usePopper(animeImgRef.current, popperElement, {
-        placement: 'top', // Popper'ın nerede görüneceğini ayarla
-        modifiers: [{ name: 'offset', options: { offset: [0, -100] } }], // Konum ayarı
+        placement: 'top', 
+        modifiers: [{ name: 'offset', options: { offset: [0, -100] } }], 
     });
 
+    const navigate = useNavigate()
+    const handleClick = (anime) => {
+        navigate(`/anime/${anime.mal_id}`, { state: { anime } })
+    }
 
     return (
         <>
@@ -81,12 +86,12 @@ export const Popper = ({ currentAnime, handleMouseEnter, handleMouseLeave, anime
                         </div>
                     </div>
                     <div className="popper-button">
-                        <Button type='primary' className='popper-watch-button' ><CaretRightFilled />Watch Now </Button>
+                        <Button type='primary' className='popper-watch-button' onClick={() => handleClick(currentAnime)} ><CaretRightFilled />Watch Now </Button>
                         <div className="popper-add-dropdown">
                             <Space direction='vertical'>
                                 <Space wrap>
                                     <Dropdown menu={{ items, }} placement='top' getPopupContainer={() => document.body} >
-                                        <Button shape='circle' >
+                                        <Button shape='circle'  >
                                             <PlusOutlined />
                                         </Button>
                                     </Dropdown>

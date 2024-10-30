@@ -83,7 +83,7 @@ function Navbar(props) {
                                             <img src={anime.images.jpg.image_url} alt="" />
                                         </div>
                                         <div className="search-detail">
-                                            <h3>{anime.title}</h3>
+                                            <h3>{anime.title_english || anime.title}</h3>
                                             <div className="search-japanese">
                                                 {anime.title_japanese}
                                             </div>

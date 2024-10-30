@@ -4,6 +4,24 @@ body {
 
 }
 
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: rgba(255, 255, 255, .4);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(0, 0, 0, .2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .3);
+}
+
 .navbar {
     z-index: 500;
     position: fixed;

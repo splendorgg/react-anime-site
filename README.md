@@ -1,14 +1,11 @@
 <h1 align="center">Anime Site Using React </h1>
 
----
-
 # Overview
----
+
 This is a feature-rich anime website clone built using **React**. The site includes features like a search bar to look up specific titles and details page that shows information about each anime. 
 
-
 ## Project Walk-Through
----
+
 ### Home Page
 
 ![ScreenShot](/public/readme/Homepage.png)
@@ -31,9 +28,7 @@ This is a feature-rich anime website clone built using **React**. The site inclu
 ![ScreenShot](/public/readme/Searchbar.png)
 - Anime Search
 
-
 # Technology Used
----
 
 - **React.js** with **Vite** for fast build and dev environments
 - **React Router** for seamless navigation between pages

@@ -217,7 +217,7 @@ function AnimeDetailPage() {
                     <div className="sidebar">
                         <div className="most-popular-sidebar">
                             <div className="section1 subsection">
-                                <h2>Top Airing</h2>
+                                <h2>Top Animes</h2>
                                 <div className="anime-block">
                                     <ul>
                                         {popularAnimes.map((popularanime, index) => (

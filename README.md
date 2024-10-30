@@ -41,7 +41,7 @@ This is a feature-rich anime website clone built using **React**. The site inclu
 - **Jikan API (v4)** for up-to-date anime data
 
 # How to Install
-1. Ensure you have [Git](https://git-scm.com/) and [Node](https://nodejs.org/en) installed.
+1. Ensure you have [Git](https://git-scm.com/) and [Node](https://nodejs.org/en) (v20.17.0) installed.
 
 2. Clone the repository and install the dependencies:
 ```
